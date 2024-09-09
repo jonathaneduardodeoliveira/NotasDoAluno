@@ -2,8 +2,9 @@ package org.example.NotasDoAluno.modelo;
 
 import org.example.NotasDoAluno.servico.Usuario;
 import org.example.NotasDoAluno.servico.AplicativoDeNotas;
-import java.util.Scanner;
+
 import java.util.Map;
+import java.util.Scanner;
 
 public class Professor extends Usuario {
     public Professor(String nome, String senha) {
@@ -15,13 +16,16 @@ public class Professor extends Usuario {
         boolean continuar = true;
 
         while (continuar) {
-            System.out.println("Menu do Professor:");
-            System.out.println("1. Cadastrar Nota");
-            System.out.println("2. Voltar ao Menu Principal");
-            System.out.println("3. Sair");
-
-            int opcao = scanner.nextInt();
-            scanner.nextLine();
+            exibirMenu();
+            int opcao = 0;
+            try {
+                opcao = scanner.nextInt();
+                scanner.nextLine(); // Limpar o buffer
+            } catch (Exception e) {
+                System.out.println("Entrada inválida. Por favor, insira um número.");
+                scanner.nextLine(); // Limpar o buffer
+                continue;
+            }
 
             switch (opcao) {
                 case 1:
@@ -37,6 +41,13 @@ public class Professor extends Usuario {
                     System.out.println("Opção inválida.");
             }
         }
+    }
+
+    private void exibirMenu() {
+        System.out.println("Menu do Professor:");
+        System.out.println("1. Cadastrar Nota");
+        System.out.println("2. Voltar ao Menu Principal");
+        System.out.println("3. Sair");
     }
 
     private void cadastrarNota(Scanner scanner) {
